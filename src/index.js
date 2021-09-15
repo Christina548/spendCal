@@ -101,3 +101,36 @@ function addTransactionList(transaction) {
         money_minus.innerHTML = `$${expense}`
     }
 }
+
+//remove item by ids
+//id parameter comes from object for transactions
+function removeItem(id) {
+    //.filter() method creates a new array with all elements that pass the test implemented by the provided function.
+    // delete if not equal to the id
+    transactions = transactions.filter(transaction => transaction.id !== id);
+    //function updateLocalStorage()
+    updateLocalStorage();
+    //initiate a clean record
+    init()
+}
+
+function updateLocalStorage() {
+    //JSON.stringify method takes a value and a key(which is a string) and creates a json file
+    localStorage.setItem('transactions', JSON.stringify(transactions))
+}
+
+//int app
+function init() {
+    //empties the list
+    list.innerHTML = ''
+
+    //go through list and update list
+    transactions.forEach(addTransactionList) //looping through the array and a
+    //updates any changes in history list
+    updateValues() //calling the amounts array
+}
+
+init()
+
+//add a transaction
+form.addEventListener('submit', addTransaction)
